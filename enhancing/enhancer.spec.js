@@ -2,8 +2,8 @@ const enhancer = require('./enhancer.js');
 // test away!
 const davina = {
   name: 'Davina',
-  enhancement: 15,
-  durability: 90
+  durability: 90,
+  enhancement: 0
 }
 
 describe('enhancer.js', () => {
@@ -13,8 +13,8 @@ describe('enhancer.js', () => {
       const {name, enhancement} = davina
       expect(enhancer.repair(davina)).toEqual({
         name: name,
-        enhancement: enhancement,
-        durability: 100
+        durability: 100,
+        enhancement: enhancement
       })
     })
   })
@@ -25,37 +25,37 @@ describe('enhancer.js', () => {
       it('should return a new item object modified', () => {
         expect(enhancer.succeed(davina)).toEqual({
           name: name,
-          enhancement: enhancement + 1,
-          durability: durability
+          durability: durability,
+          enhancement: enhancement + 1
         })
       })
     } else{
       it('should return unchanged if enhancement is greater than 20', () => {
         expect(enhancer.succeed(davina)).toEqual({
           name: name,
-          enhancement: enhancement,
-          durability: durability
+          durability: durability,
+          enhancement: enhancement
         })
       })
     }
   })
 
   describe('fail(item)', () => {
-    const {name, enhancement, durability} = davina
+    let {name, durability, enhancement} = davina
     if(enhancement < 15) {
       it('should return an object with a durability less than 5', () => {
         expect(enhancer.fail(davina)).toEqual({
           name: name,
-          enhancement: enhancement,
-          durability: durability -= 5
+          durability: durability -= 5,
+          enhancement: enhancement
         })
       })
     } else {
       it('should return unchanged if enhancement is greater than 5', () => {
         expect(enhancer.fail(davina)).toEqual({
           name: name,
-          enhancement: enhancement,
-          durability: durability
+          durability: durability,
+          enhancement: enhancement
         })
       })
     }
